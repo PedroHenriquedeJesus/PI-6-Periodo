@@ -10,27 +10,29 @@ import { CascadeSelectModule } from "primeng/cascadeselect";
 import { MultiSelectModule } from "primeng/multiselect";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { InputTextModule } from "primeng/inputtext";
-import { EmptyDemoRoutingModule } from './emptydemo-routing.module';
-import { EmptyDemoComponent } from './emptydemo.component';
 import { InputMaskModule } from 'primeng/inputmask';
+import { CadastroRoutingModule } from './cadastro-routing.module';
+import { CadastroComponent } from './cadastro.component';
+
+
 
 @NgModule({
-    imports: [
-        CommonModule,
-		FormsModule,
-		EmptyDemoRoutingModule,
-		AutoCompleteModule,
-		CalendarModule,
-		ChipsModule,
-		DropdownModule,
-		InputMaskModule,
-		InputNumberModule,
-		CascadeSelectModule,
-		MultiSelectModule,
-		InputTextareaModule,
-		InputTextModule,
-        InputMaskModule
-    ],
-    declarations: [EmptyDemoComponent]
+  declarations: [],
+  imports: [
+      CommonModule,
+      FormsModule,
+      CadastroModule,
+      AutoCompleteModule,
+      CalendarModule,
+      ChipsModule,
+      DropdownModule,
+      InputMaskModule,
+      InputNumberModule,
+      CascadeSelectModule,
+      MultiSelectModule,
+      InputTextareaModule,
+      InputTextModule,
+      InputMaskModule
+  ]
 })
-export class EmptyDemoModule { }
+export class CadastroModule { }
