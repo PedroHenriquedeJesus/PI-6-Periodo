@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -19,5 +21,9 @@ export class LoginComponent {
 
     password!: string;
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService, private router: Router) { }
+
+    login() {
+        this.router.navigate(['./empty/emptydemo.module']);
+    }
 }
