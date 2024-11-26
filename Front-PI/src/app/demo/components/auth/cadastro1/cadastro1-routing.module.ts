@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CadastroComponent } from './cadastro.component';
+import { Cadastro1Component } from './cadastro1.component';
 
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: '', component: CadastroComponent }
+        { path: '', component: Cadastro1Component }
     ])],
     exports: [RouterModule]
 })
-export class CadastroRoutingModule { }
+export class Cadastro1RoutingModule { }

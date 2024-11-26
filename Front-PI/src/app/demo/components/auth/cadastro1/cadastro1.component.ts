@@ -4,8 +4,8 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
+    selector: 'app-cadastro1',
+    templateUrl: './cadastro1.component.html',
     styles: [`
         :host ::ng-deep .pi-eye,
         :host ::ng-deep .pi-eye-slash {
@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
         }
     `]
 })
-export class LoginComponent {
+export class Cadastro1Component {
 
     valCheck: string[] = ['remember'];
 
@@ -23,7 +23,7 @@ export class LoginComponent {
 
     constructor(public layoutService: LayoutService, private router: Router) { }
 
-    login() {
-        this.router.navigate(['./cadastro1/cadastro1.module']);
+    cadastro1() {
+        this.router.navigate(['./empty/emptydemo.module']);
     }
 }
