@@ -1,7 +1,6 @@
 package com.projetoPI.VPK.config;
 
 
-
 import com.projetoPI.VPK.model.User;
 import com.projetoPI.VPK.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private IUserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username)  {
         User user = userRepository
                 .findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
@@ -37,4 +36,3 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 authorities);
     }
 }
-

@@ -6,24 +6,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 @Entity
-@Table(name = "TB_USERS")
+@Table(name = "ENG_USER")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String username;
+
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "TB_ROLE", joinColumns = @JoinColumn(name = "id"))
+    @CollectionTable(name = "ENG_ROLE", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "role_id")
-    private List<String> roles;
+    private List<String> roles = new ArrayList<>(); // Inicializar a lista
 
-    public User() {}
+    public User() {
+    }
 
-    public User(String username, String password, List<String> roles) {
+    public User(Long id, String username, String password, List<String> roles) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.roles = roles;
@@ -54,9 +58,6 @@ public class User {
     }
 
     public List<String> getRoles() {
-        if (Objects.isNull(roles)) {
-            roles = new ArrayList<>();
-        }
         return roles;
     }
 
@@ -87,3 +88,4 @@ public class User {
                 '}';
     }
 }
+
