@@ -8,6 +8,9 @@ import { FinalizacaoRoutingModule } from './finalizacao-routing.module';
 import { FinalizacaoComponent } from './finalizacao.component';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TableModule } from 'primeng/table';
+import { GoogleMapsModule } from '@angular/google-maps';
+
+
 
 @NgModule({
     imports: [
@@ -19,7 +22,9 @@ import { TableModule } from 'primeng/table';
         InputTextModule,
         FormsModule,
         InputMaskModule,
-        TableModule
+        TableModule,
+        GoogleMapsModule
+
     ],
     declarations: [FinalizacaoComponent]
 })

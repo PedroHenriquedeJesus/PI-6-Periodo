@@ -32,6 +32,22 @@
             </form>
 
         </div>
+
+        <div class="card">
+            <h1>Localização</h1>
+
+            <google-map height="450px"
+                        width="1000px"
+                        [center]="center"
+                        [zoom]="zoom"
+                        (mapClick)="moveMap($event)"
+                        (mapMousemove)="move($event)">
+            </google-map>
+
+            <div>Latitude: {{display?.lat}}</div>
+            <div>Longitude: {{display?.lng}}</div>
+        </div>
+
         <div class="card">
             <h5>Pedidos</h5>
             <p-table  [paginator]="true" [rows]="4" responsiveLayout="scroll">
@@ -57,5 +73,6 @@
                 </ng-template>
             </p-table>
         </div>
+
     </div>
 </div>
