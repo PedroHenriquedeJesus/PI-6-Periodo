@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputMaskModule } from 'primeng/inputmask';
+import { HttpClientModule } from '@angular/common/http';
+import { RegisterService } from 'src/app/services/register.service.ts';
 
 @NgModule({
     imports: [
@@ -18,7 +20,10 @@ import { InputMaskModule } from 'primeng/inputmask';
         InputTextModule,
         FormsModule,
         PasswordModule,
-        InputMaskModule
+        InputMaskModule,
+        HttpClientModule
+
+
     ],
     declarations: [Cadastro1Component]
 })
