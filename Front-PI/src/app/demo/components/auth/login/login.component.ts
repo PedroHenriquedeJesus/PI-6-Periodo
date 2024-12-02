@@ -1,29 +1,39 @@
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styles: [`
-        :host ::ng-deep .pi-eye,
-        :host ::ng-deep .pi-eye-slash {
-            transform:scale(1.6);
-            margin-right: 1rem;
-            color: var(--primary-color) !important;
-        }
-    `]
+    styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+    email: string = '';
+    senha: string = '';
 
-    valCheck: string[] = ['remember'];
-
-    password!: string;
-
-    constructor(public layoutService: LayoutService, private router: Router) { }
+    constructor(private authService: AuthService, private router: Router) {}
 
     login() {
-        this.router.navigate(['./cadastro1/cadastro1.module']);
+        const loginDTO = {
+            email: this.email,
+            senha: this.senha,
+        };
+
+        this.authService.login(loginDTO).subscribe(
+            (response) => {
+                // Se login for bem-sucedido, você pode salvar o token ou qualquer outra coisa
+                console.log('Login bem-sucedido', response);
+
+                // Salve o token se necessário
+                localStorage.setItem('auth_token', response.token);
+
+                // Redireciona para a página inicial ou para onde for necessário
+                this.router.navigate(['/dashboard']);
+            },
+            (error) => {
+                console.error('Erro ao fazer login', error);
+                alert('Credenciais inválidas!');
+            }
+        );
     }
 }
