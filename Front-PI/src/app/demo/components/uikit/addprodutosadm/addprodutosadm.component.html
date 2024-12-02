@@ -1,0 +1,30 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Adicionar Produto</h5>
+            <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+                <div class="p-fluid grid formgrid">
+                    <div class="field col-12">
+                        <label for="productImage">Foto do Produto</label>
+                        <input id="productImage" type="file" pInputText (change)="onFileSelect($event)" accept="image/*" />
+                    </div>
+                    <div class="field col-12">
+                        <label for="productName">Nome</label>
+                        <input id="productName" type="text" pInputText [(ngModel)]="product.name" name="name" required />
+                    </div>
+                    <div class="field col-12">
+                        <label for="productDescription">Descrição</label>
+                        <textarea id="productDescription" pInputTextarea [(ngModel)]="product.description" name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="field col-12">
+                        <label for="productPrice">Preço</label>
+                        <input id="productPrice" type="number" pInputText [(ngModel)]="product.price" name="price" required />
+                    </div>
+                </div>
+                <div class="flex justify-content-end">
+                    <button pButton type="submit" label="Salvar Produto" class="p-button-success" [disabled]="productForm.invalid"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
