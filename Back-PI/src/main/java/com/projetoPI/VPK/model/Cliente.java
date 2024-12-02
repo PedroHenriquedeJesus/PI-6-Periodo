@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_user")
+@Table(name = "tb_cliente")
 public class Cliente implements UserDetails {
 
     @Id
@@ -26,10 +26,10 @@ public class Cliente implements UserDetails {
 
     private RoleUsers role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
     // Construtores

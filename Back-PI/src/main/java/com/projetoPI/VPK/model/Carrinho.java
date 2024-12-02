@@ -14,7 +14,7 @@ public class Carrinho {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "cliente_id")
     private Cliente usuario;
 
     @Column(name = "status")

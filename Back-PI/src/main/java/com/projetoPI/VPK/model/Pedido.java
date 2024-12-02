@@ -24,7 +24,7 @@ public class Pedido {
     private StatusDoPedido status;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @ManyToOne

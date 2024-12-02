@@ -46,7 +46,7 @@ export class LoginComponent {
                 localStorage.setItem('auth_token', response.token);
 
                 // Navegar para a página principal ou dashboard após o login
-                this.router.navigate(['/dashboard']);  // Ajuste para a página desejada
+                this.router.navigate(['/uikit/list']);
             },
             (error) => {
                 console.error('Erro ao fazer login', error);
