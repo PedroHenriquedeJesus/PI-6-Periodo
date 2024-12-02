@@ -3,7 +3,7 @@ package com.projetoPI.VPK.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TB_ROTA")
+@Table(name = "tb_rota")
 public class Rota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,9 +12,11 @@ public class Rota {
     private Double latitude;
     private Double longitude;
     private Integer numeroSequencial;
+
     @ManyToOne
     @JoinColumn(name = "entregador_id")
     private Entregador entregador;
+
 
     public Rota() {
     }

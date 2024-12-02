@@ -1,17 +1,23 @@
 package com.projetoPI.VPK.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+
 @Entity
-@Table(name = "TB_ITEMPEDIDO")
+@Table(name = "tb_item_pedido")
 public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @ManyToOne
     @JoinColumn(name = "pedido_id")
+    @JsonBackReference
     private Pedido pedido;
+
+
 
     @ManyToOne
     @JoinColumn(name = "produto_id")
@@ -30,7 +36,6 @@ public class ItemPedido {
         this.quantidade = quantidade;
         this.preco = preco;
     }
-
 
     public Long getId() {
         return id;

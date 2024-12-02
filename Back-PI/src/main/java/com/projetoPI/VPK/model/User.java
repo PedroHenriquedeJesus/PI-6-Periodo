@@ -1,37 +1,74 @@
 package com.projetoPI.VPK.model;
 
+import com.projetoPI.VPK.model.enums.RoleUsers;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
-@Table(name = "ENG_USER")
-public class User {
+@Table(name = "tb_user")
+public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nome;
+    private String CPF;
+    @Column(unique = true)
+    private String email;
+    private String telefone;
+    private String senha;
 
-    private String username;
+    private RoleUsers role;
 
-    private String password;
+    @OneToMany(mappedBy = "user")
+    private List<Pedido> pedidos = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "ENG_ROLE", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "role_id")
-    private List<String> roles = new ArrayList<>(); // Inicializar a lista
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Endereco> enderecos = new ArrayList<>();
+
+    // Construtores
 
     public User() {
     }
 
-    public User(Long id, String username, String password, List<String> roles) {
+    public User(Long id, String nome, String CPF, String email, String telefone, String senha, RoleUsers role, List<Pedido> pedidos, List<Endereco> enderecos) {
         this.id = id;
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
+        this.nome = nome;
+        this.CPF = CPF;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.role = role;
+        this.pedidos = pedidos;
+        this.enderecos = enderecos;
     }
+
+    public User(Long id, String nome, String CPF, String email, String telefone, String senha, RoleUsers role) {
+        this.id = id;
+        this.nome = nome;
+        this.CPF = CPF;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.role = role;
+    }
+
+    public User(String email , String senha, RoleUsers role, String telefone , String CPF, String nome){
+        this.email = email;
+        this.senha = senha;
+        this.role = role;
+        this.telefone = telefone;
+        this.CPF = CPF;
+        this.nome = nome;
+    }
+
+    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -41,51 +78,124 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNome() {
+        return nome;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public RoleUsers getRole() {
+        return role;
+    }
+
+    public void setRole(RoleUsers role) {
+        this.role = role;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    // Métodos do UserDetails
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == RoleUsers.admin)
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
     public String getPassword() {
-        return password;
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String getUsername() {
+        return email;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    // Equals and HashCode (baseado no ID)
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
+
+        return id != null ? id.equals(user.id) : user.id == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, roles);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                '}';
+        return id != null ? id.hashCode() : 0;
     }
 }
-

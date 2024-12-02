@@ -1,17 +1,14 @@
-package com.projetoPI.VPK.model;
-
-import jakarta.persistence.*;
-
-import java.util.HashSet;
-import java.util.Set;
+package com.projetoPI.VPK.model.dto;
 
 
-@Entity
-@Table(name = "tb_produto")
-public class Produto {
+import com.projetoPI.VPK.model.Produto;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import java.util.Random;
+
+public class ProdutoDTO {
+
+
+
     private Long id;
     private String name;
     private String description;
@@ -19,20 +16,24 @@ public class Produto {
     private Double price;
     private Integer rating;
 
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ItemPedido> itens = new HashSet<>();
+    public ProdutoDTO(){}
 
-    public Produto() {
-    }
-
-    public Produto(Long id, String name, String description, String image, Double price, Integer rating, Set<ItemPedido> itens) {
+    public ProdutoDTO(Long id, String name, String description, String image, Double price, Integer rating) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.image = image;
         this.price = price;
         this.rating = rating;
-        this.itens = itens;
+    }
+
+    public ProdutoDTO(Produto entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.description = entity.getDescription();
+        this.image = entity.getImage();
+        this.price = entity.getPrice();
+        this.rating = entity.getRating() != null ? entity.getRating() : new Random().nextInt(5) + 1;
     }
 
     public Long getId() {
@@ -81,13 +82,5 @@ public class Produto {
 
     public void setRating(Integer rating) {
         this.rating = rating;
-    }
-
-    public Set<ItemPedido> getItens() {
-        return itens;
-    }
-
-    public void setItens(Set<ItemPedido> itens) {
-        this.itens = itens;
     }
 }

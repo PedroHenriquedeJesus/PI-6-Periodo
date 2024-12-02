@@ -1,10 +1,15 @@
 package com.projetoPI.VPK.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+
+import java.util.List;
+
 @Entity
-@Table(name = "TB_ENDERECO")
+@Table(name = "tb_endereco")
 public class Endereco {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,28 +18,30 @@ public class Endereco {
     private String cep;
     private String complemento;
     private Integer numero;
-    private String bairro;
-    private String cidade;
+
+    @OneToMany(mappedBy = "endereco")
+    @JsonManagedReference  // Evita o loop, serializa a lista de pedidos
+    private List<Pedido> pedidos;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
     public Endereco() {
     }
 
-    public Endereco(Long id, String rua, String descricao, String cep, String complemento, Integer numero, String bairro, String cidade, Cliente cliente) {
+    public Endereco(Long id, String rua, String descricao, String cep, String complemento, Integer numero, List<Pedido> pedidos, User user) {
         this.id = id;
         this.rua = rua;
         this.descricao = descricao;
         this.cep = cep;
         this.complemento = complemento;
         this.numero = numero;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.cliente = cliente;
+        this.pedidos = pedidos;
+        this.user = user;
     }
+
 
     public Long getId() {
         return id;
@@ -84,27 +91,19 @@ public class Endereco {
         this.numero = numero;
     }
 
-    public String getBairro() {
-        return bairro;
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
-    public String getCidade() {
-        return cidade;
+    public User getUser() {
+        return user;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
