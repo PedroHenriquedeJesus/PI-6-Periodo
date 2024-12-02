@@ -9,33 +9,36 @@
 
                 <div class="field">
                     <label for="name1" class="block text-900 text-xl font-medium mb-2">Nome</label>
-                    <input id="name1" type="text" placeholder="Nome" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                    <input id="name1" type="text" [(ngModel)]="nome" name="nome" placeholder="Nome" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
                 </div>
                 <div class="field">
                     <label for="emailCad" class="block text-900 text-xl font-medium mb-2">Email</label>
-                    <input id="emailCad" type="text" placeholder="Endereço de Email" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                    <input id="emailCad" type="text" [(ngModel)]="email" name="email" placeholder="Endereço de Email" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
                 </div>
                 <label class="block text-900 text-xl font-medium mb-2">CPF </label>
                 <div class="field" class="w-full md:w-30rem mb-5">
                     <p-inputMask
                         mask="999.999.999-99"
-                        id="cpf" autofocus />
+                        [(ngModel)]="cpf"
+                        name="cpf" autofocus />
                 </div>
 
                 <label class="block text-900 text-xl font-medium mb-2 " style="margin-top: 30px;">Telefone</label>
-                <div class="field" >
+                <div class="field">
                     <p-inputMask
                         mask="(99) 99999-9999"
-                        id="telefone" autofocus />
+                        [(ngModel)]="telefone"
+                        name="telefone" autofocus />
                 </div>
 
                 <label for="passwordCad" class="block text-900 font-medium text-xl mb-2" style="margin-top: 30px;">Senha</label>
-                <p-password id="passwordCad" [(ngModel)]="senha" placeholder="Senha" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                <p-password id="passwordCad" [(ngModel)]="senha" name="senha" placeholder="Senha" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
 
-                <label for="cPassword" class="block text-900 font-medium text-xl mb-2" >Confirmar senha</label>
-                <p-password id="cPassword" [(ngModel)]="senha" placeholder="Confirmar senha" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                <label for="cPassword" class="block text-900 font-medium text-xl mb-2">Confirmar senha</label>
+                <p-password id="cPassword" [(ngModel)]="senhaConfirm" name="senhaConfirm" placeholder="Confirmar senha" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
 
-                <button pButton pRipple label="Enviar" class="w-full p-3 text-xl" [routerLink]="['/']" style="margin-top: 20px;"></button>
-
+                <button pButton pRipple label="Enviar" class="w-full p-3 text-xl" (click)="cadastro1()" style="margin-top: 20px"></button>
             </div>
         </div>
+    </div>
+</div>
