@@ -49,8 +49,8 @@ export class ListDemoComponent implements OnInit {
             { name: 'Rome', code: 'RM' }];
 
         this.sortOptions = [
-            { label: 'Price High to Low', value: '!price' },
-            { label: 'Price Low to High', value: 'price' }
+            { label: 'Maior preço para menor', value: '!price' },
+            { label: 'Menor preço para maior', value: 'price' }
         ];
     }
 
@@ -69,5 +69,5 @@ export class ListDemoComponent implements OnInit {
     onFilter(dv: DataView, event: Event) {
         dv.filter((event.target as HTMLInputElement).value);
     }
-    
+
 }

@@ -1,8 +1,35 @@
-<div class="grid">
-    <div class="col-12">
-        <div class="card">
-            <h4>Empty Page</h4>
-            <p>This is your empty page template to start building beautiful applications.</p>
-        </div>
-    </div>
-</div>
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <img src="assets/layout/images/LogoKeysSoft.png" style="width: 200px; height: 200px;">
+        <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+            <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+                <div class="text-center mb-5">
+                </div>
+
+                <h5 style="font-size: 30px;">Cadastro</h5 >
+                <div class="field">
+                    <label htmlFor="name1">Nome</label>
+                    <input pInputText id="name1" type="text" />
+                </div>
+                <div class="field">
+                    <label htmlFor="email1">Email</label>
+                    <input pInputText id="email1" type="text" />
+                </div>
+                <div class="field">
+                    <label for="cpf">CPF</label>
+                    <p-inputMask
+                        mask="999.999.999-99"
+                        id="cpf" autofocus />
+                </div>
+
+                <div class="field">
+                    <label for="CPF">Telefone</label>
+                    <p-inputMask
+                        mask="(99) 99999-9999"
+                        id="telefone" autofocus />
+                </div>
+
+                    <button pButton pRipple label="Enviar" class="w-full p-3 text-xl" [routerLink]="['/']"></button>
+
+                </div>
+            </div>
