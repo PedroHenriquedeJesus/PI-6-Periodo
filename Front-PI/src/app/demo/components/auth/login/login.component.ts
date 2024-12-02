@@ -1,34 +1,52 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { AuthService } from 'src/app/services/auth.service';  // Adicionando o serviço de autenticação
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
+    styles: [
+        `
+        :host ::ng-deep .pi-eye,
+        :host ::ng-deep .pi-eye-slash {
+            transform: scale(1.6);
+            margin-right: 1rem;
+            color: var(--primary-color) !important;
+        }
+        `
+    ]
 })
 export class LoginComponent {
-    email: string = '';
-    senha: string = '';
 
-    constructor(private authService: AuthService, private router: Router) {}
+    valCheck: string[] = ['remember'];
+    email: string = '';  // Adicionando email
+    password!: string;  // Senha
+
+    constructor(
+        public layoutService: LayoutService,
+        private router: Router,
+        private authService: AuthService  // Injetando o AuthService
+    ) { }
 
     login() {
+        // Criando o objeto DTO para enviar para o backend
         const loginDTO = {
             email: this.email,
-            senha: this.senha,
+            senha: this.password
         };
 
+        // Chamando o serviço de login
         this.authService.login(loginDTO).subscribe(
             (response) => {
-                // Se login for bem-sucedido, você pode salvar o token ou qualquer outra coisa
+                // Se o login for bem-sucedido, podemos salvar o token ou qualquer outra coisa
                 console.log('Login bem-sucedido', response);
 
-                // Salve o token se necessário
+                // Exemplo de como armazenar o token no localStorage
                 localStorage.setItem('auth_token', response.token);
 
-                // Redireciona para a página inicial ou para onde for necessário
-                this.router.navigate(['/dashboard']);
+                // Navegar para a página principal ou dashboard após o login
+                this.router.navigate(['/dashboard']);  // Ajuste para a página desejada
             },
             (error) => {
                 console.error('Erro ao fazer login', error);
