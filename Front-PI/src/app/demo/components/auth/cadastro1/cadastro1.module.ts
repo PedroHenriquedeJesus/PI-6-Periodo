@@ -9,7 +9,7 @@ import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputMaskModule } from 'primeng/inputmask';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterService } from 'src/app/services/register.service.ts';
+
 
 @NgModule({
     imports: [
