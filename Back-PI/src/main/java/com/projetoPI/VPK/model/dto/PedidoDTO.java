@@ -11,7 +11,7 @@ public class PedidoDTO {
     private Long id;
     private Instant data;
     private StatusDoPedido status;
-    private UserMinDTO user;
+    private ClienteMinDTO user;
     private EnderecoDTO endereco;
 
     List<ItemPedidoDTO> ItensPedido = new ArrayList<>();
@@ -23,7 +23,7 @@ public class PedidoDTO {
       this.id = pedido.getId();
       this.data = pedido.getData();
       this.status = pedido.getStatus();
-      this.user = new UserMinDTO(pedido.getUser());
+      this.user = new ClienteMinDTO(pedido.getUser());
       this.endereco = new EnderecoDTO(pedido.getEndereco());
         for (ItemPedido item: pedido.getItens()){
             ItensPedido.add(new ItemPedidoDTO(item));
@@ -54,11 +54,11 @@ public class PedidoDTO {
         this.status = status;
     }
 
-    public UserMinDTO getUser() {
+    public ClienteMinDTO getUser() {
         return user;
     }
 
-    public void setUser(UserMinDTO user) {
+    public void setUser(ClienteMinDTO user) {
         this.user = user;
     }
 

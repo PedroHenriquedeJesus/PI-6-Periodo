@@ -1,6 +1,6 @@
 package com.projetoPI.VPK.Security;
 
-import com.projetoPI.VPK.repository.UserRepository;
+import com.projetoPI.VPK.repository.ClienteRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private TokenService tokenService;
     @Autowired
-    private UserRepository userRepository;
+    private ClienteRepository clienteRepository;
 
     public SecurityFilter(TokenService tokenService) {
         this.tokenService = tokenService;
@@ -32,7 +32,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             var email = tokenService.validateToken(token);
 
             // Verifique se o email foi encontrado no banco de dados
-            UserDetails user = userRepository.findByEmail(email);
+            UserDetails user = clienteRepository.findByEmail(email);
 
             if (user != null) {
                 var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

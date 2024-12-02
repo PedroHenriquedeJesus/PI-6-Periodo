@@ -1,9 +1,9 @@
 package com.projetoPI.VPK.controllers;
 
 
-import com.projetoPI.VPK.model.dto.UserDTO;
-import com.projetoPI.VPK.repository.UserRepository;
-import com.projetoPI.VPK.services.UserService;
+import com.projetoPI.VPK.model.dto.ClienteDTO;
+import com.projetoPI.VPK.repository.ClienteRepository;
+import com.projetoPI.VPK.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,25 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("user")
-public class UserController {
+@RequestMapping("cliente")
+public class ClienteController {
 
     @Autowired
-    UserService service;
+    ClienteService service;
     @Autowired
-    private UserRepository userRepository;
+    private ClienteRepository clienteRepository;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> findById(@PathVariable Long id){
-        UserDTO usuario = service.findById(id);
+    public ResponseEntity<ClienteDTO> findById(@PathVariable Long id){
+        ClienteDTO usuario = service.findById(id);
         return  ResponseEntity.ok(usuario);
     }
 
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> findAll(){
+    public ResponseEntity<List<ClienteDTO>> findAll(){
 
-        List<UserDTO> dto =service.findAll();
+        List<ClienteDTO> dto =service.findAll();
         return ResponseEntity.ok(dto);
     }
 }

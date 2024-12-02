@@ -1,26 +1,26 @@
 package com.projetoPI.VPK.model.dto;
 
 
-import com.projetoPI.VPK.model.User;
+import com.projetoPI.VPK.model.Cliente;
 
-public class UserMinDTO {
+public class ClienteMinDTO {
 
     private Long id;
     private String nome;
     private String telefone;
 
-    public UserMinDTO() {}
+    public ClienteMinDTO() {}
 
-    public UserMinDTO(Long id, String nome, String telefone) {
+    public ClienteMinDTO(Long id, String nome, String telefone) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
     }
 
-    public UserMinDTO(User user) {
-        this.id = user.getId();
-        this.nome = user.getNome();
-        this.telefone = user.getTelefone();
+    public ClienteMinDTO(Cliente cliente) {
+        this.id = cliente.getId();
+        this.nome = cliente.getNome();
+        this.telefone = cliente.getTelefone();
 
     }
 

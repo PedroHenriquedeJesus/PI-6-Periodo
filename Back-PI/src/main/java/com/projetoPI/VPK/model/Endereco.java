@@ -25,13 +25,13 @@ public class Endereco {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Cliente cliente;
 
 
     public Endereco() {
     }
 
-    public Endereco(Long id, String rua, String descricao, String cep, String complemento, Integer numero, List<Pedido> pedidos, User user) {
+    public Endereco(Long id, String rua, String descricao, String cep, String complemento, Integer numero, List<Pedido> pedidos, Cliente cliente) {
         this.id = id;
         this.rua = rua;
         this.descricao = descricao;
@@ -39,7 +39,7 @@ public class Endereco {
         this.complemento = complemento;
         this.numero = numero;
         this.pedidos = pedidos;
-        this.user = user;
+        this.cliente = cliente;
     }
 
 
@@ -99,11 +99,11 @@ public class Endereco {
         this.pedidos = pedidos;
     }
 
-    public User getUser() {
-        return user;
+    public Cliente getUser() {
+        return cliente;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

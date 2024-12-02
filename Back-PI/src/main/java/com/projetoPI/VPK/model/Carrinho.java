@@ -15,7 +15,7 @@ public class Carrinho {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    private User usuario;
+    private Cliente usuario;
 
     @Column(name = "status")
     private StatusDoCarrinho status;
@@ -24,7 +24,7 @@ public class Carrinho {
     }
 
 
-    public Carrinho(Long id, User usuario, StatusDoCarrinho status) {
+    public Carrinho(Long id, Cliente usuario, StatusDoCarrinho status) {
         this.id = id;
         this.usuario = usuario;
         this.status = status;
@@ -39,11 +39,11 @@ public class Carrinho {
         this.status = status;
     }
 
-    public User getUsuario() {
+    public Cliente getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(User usuario) {
+    public void setUsuario(Cliente usuario) {
         this.usuario = usuario;
     }
 

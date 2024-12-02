@@ -6,7 +6,7 @@ import com.projetoPI.VPK.model.dto.*;
 import com.projetoPI.VPK.repository.EnderecoRepository;
 import com.projetoPI.VPK.repository.PedidoRepository;
 import com.projetoPI.VPK.repository.ProdutoRepository;
-import com.projetoPI.VPK.repository.UserRepository;
+import com.projetoPI.VPK.repository.ClienteRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class PedidoService {
     @Autowired
     private ProdutoRepository produtoRepository;
     @Autowired
-    private UserRepository userRepository;
+    private ClienteRepository clienteRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
 
@@ -42,9 +42,9 @@ public class PedidoService {
         pedido.setStatus(StatusDoPedido.PREPARANDO);
 
         // Associa o usuário ao pedido
-        User user = userRepository.findById(dto.getUser().getId())
+        Cliente cliente = clienteRepository.findById(dto.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        pedido.setUser(user);
+        pedido.setUser(cliente);
 
         // Associa o endereço ao pedido
         if (dto.getEndereco() != null && dto.getEndereco().getId() != null) {
@@ -90,9 +90,9 @@ public class PedidoService {
 
         // Atualiza o usuário, se o ID for fornecido
         if (dto.getUser() != null && dto.getUser().getId() != null) {
-            User user = userRepository.findById(dto.getUser().getId())
+            Cliente cliente = clienteRepository.findById(dto.getUser().getId())
                     .orElseThrow(() -> new RuntimeException("User not found"));
-            pedido.setUser(user);
+            pedido.setUser(cliente);
         }
 
         // Atualiza o endereço

@@ -1,10 +1,10 @@
 package com.projetoPI.VPK.model.dto;
 
 
-import com.projetoPI.VPK.model.User;
+import com.projetoPI.VPK.model.Cliente;
 import com.projetoPI.VPK.model.enums.RoleUsers;
 
-public class UserDTO {
+public class ClienteDTO {
 
 
     private Long id;
@@ -16,16 +16,16 @@ public class UserDTO {
 
     private RoleUsers role;
 
-    public UserDTO() {}
+    public ClienteDTO() {}
 
-    public UserDTO(User user) {
-        this.id = user.getId();
-        this.nome = user.getNome();
-        this.CPF = user.getCPF();
-        this.email = user.getEmail();
-        this.telefone = user.getTelefone();
-        this.senha = user.getSenha();
-        this.role = user.getRole();
+    public ClienteDTO(Cliente cliente) {
+        this.id = cliente.getId();
+        this.nome = cliente.getNome();
+        this.CPF = cliente.getCPF();
+        this.email = cliente.getEmail();
+        this.telefone = cliente.getTelefone();
+        this.senha = cliente.getSenha();
+        this.role = cliente.getRole();
     }
 
     public Long getId() {

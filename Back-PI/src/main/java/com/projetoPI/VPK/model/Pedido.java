@@ -25,7 +25,7 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
@@ -38,11 +38,11 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(Long id, Instant data, StatusDoPedido status, User user, Endereco endereco, Set<ItemPedido> itens) {
+    public Pedido(Long id, Instant data, StatusDoPedido status, Cliente cliente, Endereco endereco, Set<ItemPedido> itens) {
         this.id = id;
         this.data = data;
         this.status = status;
-        this.user = user;
+        this.cliente = cliente;
         this.endereco = endereco;
         this.itens = itens;
     }
@@ -71,12 +71,12 @@ public class Pedido {
         this.status = status;
     }
 
-    public User getUser() {
-        return user;
+    public Cliente getUser() {
+        return cliente;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Endereco getEndereco() {

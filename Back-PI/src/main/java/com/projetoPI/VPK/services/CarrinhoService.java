@@ -14,7 +14,7 @@ public class CarrinhoService {
     @Autowired
     private CarrinhoRepository carrinhoRepository;
     @Autowired
-    private UserService userService;
+    private ClienteService clienteService;
     @Autowired
     private ProdutoService produtoService;
     @Autowired
@@ -56,7 +56,7 @@ public class CarrinhoService {
 
         else {
 
-            carrinhoSalva.setUsuario(userService.findCompletUserById(carrinho.getId_usuario()));
+            carrinhoSalva.setUsuario(clienteService.findCompletUserById(carrinho.getId_usuario()));
             carrinhoSalva.setStatus(StatusDoCarrinho.PENDENTE);
 
             Carrinho carrinhoAdicionado = carrinhoRepository.save(carrinhoSalva);

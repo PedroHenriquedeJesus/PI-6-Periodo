@@ -2,10 +2,10 @@ package com.projetoPI.VPK.controllers;
 
 
 import com.projetoPI.VPK.Security.TokenService;
-import com.projetoPI.VPK.model.User;
-import com.projetoPI.VPK.model.dto.AuthenticatorDTO;
-import com.projetoPI.VPK.model.dto.RegisterDTO;
-import com.projetoPI.VPK.repository.UserRepository;
+import com.projetoPI.VPK.model.Cliente;
+import com.projetoPI.VPK.model.dto.AutenticacaoDTO;
+import com.projetoPI.VPK.model.dto.RegistrarDTO;
+import com.projetoPI.VPK.repository.ClienteRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,38 +23,38 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthenticatorController {
+public class AutenticacaoController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository repository;
+    private ClienteRepository repository;
     @Autowired
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody @Valid AuthenticatorDTO dto) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody @Valid AutenticacaoDTO dto) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(dto.email(), dto.senha());
         Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
 
 
-        User user = (User) authentication.getPrincipal();
-        String token = tokenService.generateToken(user);
+        Cliente cliente = (Cliente) authentication.getPrincipal();
+        String token = tokenService.generateToken(cliente);
 
         Map<String, Object> response = new HashMap<>();
         response.put("token", token);
-        response.put("user", user); // Adiciona o objeto User diretamente
+        response.put("user", cliente); // Adiciona o objeto User diretamente
 
         return ResponseEntity.ok(response);
     }
 
     @PostMapping ("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO dto ){
+    public ResponseEntity register(@RequestBody @Valid RegistrarDTO dto ){
         if(this.repository.findByEmail(dto.email()) != null)return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(dto.senha());
 
-        User newUser = new User(dto.email(),encryptedPassword,dto.role(),dto.telefone(),dto.CPF(), dto.nome());
-        this.repository.save(newUser);
+        Cliente newCliente = new Cliente(dto.email(),encryptedPassword,dto.role(),dto.telefone(),dto.CPF(), dto.nome());
+        this.repository.save(newCliente);
 
         return ResponseEntity.ok().build();
     }

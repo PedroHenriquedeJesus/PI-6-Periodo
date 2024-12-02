@@ -2,7 +2,7 @@ package com.projetoPI.VPK.services;
 
 
 import com.projetoPI.VPK.model.Endereco;
-import com.projetoPI.VPK.model.User;
+import com.projetoPI.VPK.model.Cliente;
 import com.projetoPI.VPK.model.dto.EnderecoDTO;
 import com.projetoPI.VPK.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +28,9 @@ public class EnderecoService {
         endereco.setNumero(dto.getNumero());
 
         // Apenas atribuindo o ID do usuário (não o objeto User completo)
-        User user = new User();
-        user.setId(dto.getUserId()); // Assumindo que você já tenha um método para configurar o User com base no ID
-        endereco.setUser(user); // Associando o ID do usuário no Endereco
+        Cliente cliente = new Cliente();
+        cliente.setId(dto.getUserId()); // Assumindo que você já tenha um método para configurar o User com base no ID
+        endereco.setUser(cliente); // Associando o ID do usuário no Endereco
 
         // Salvando no banco (se necessário)
         endereco = enderecoRepository.save(endereco);
@@ -56,9 +56,9 @@ public class EnderecoService {
         endereco.setComplemento(dto.getComplemento());
         endereco.setRua(dto.getRua());
         endereco.setNumero(dto.getNumero());
-        User user = new User();
-        user.setId(dto.getUserId());
-        endereco.setUser(user);
+        Cliente cliente = new Cliente();
+        cliente.setId(dto.getUserId());
+        endereco.setUser(cliente);
         endereco = enderecoRepository.save(endereco);
         return new EnderecoDTO(endereco);
     }

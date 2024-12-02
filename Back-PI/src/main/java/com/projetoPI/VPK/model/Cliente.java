@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_user")
-public class User implements UserDetails {
+public class Cliente implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +34,10 @@ public class User implements UserDetails {
 
     // Construtores
 
-    public User() {
+    public Cliente() {
     }
 
-    public User(Long id, String nome, String CPF, String email, String telefone, String senha, RoleUsers role, List<Pedido> pedidos, List<Endereco> enderecos) {
+    public Cliente(Long id, String nome, String CPF, String email, String telefone, String senha, RoleUsers role, List<Pedido> pedidos, List<Endereco> enderecos) {
         this.id = id;
         this.nome = nome;
         this.CPF = CPF;
@@ -49,7 +49,7 @@ public class User implements UserDetails {
         this.enderecos = enderecos;
     }
 
-    public User(Long id, String nome, String CPF, String email, String telefone, String senha, RoleUsers role) {
+    public Cliente(Long id, String nome, String CPF, String email, String telefone, String senha, RoleUsers role) {
         this.id = id;
         this.nome = nome;
         this.CPF = CPF;
@@ -59,7 +59,7 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public User(String email , String senha, RoleUsers role, String telefone , String CPF, String nome){
+    public Cliente(String email , String senha, RoleUsers role, String telefone , String CPF, String nome){
         this.email = email;
         this.senha = senha;
         this.role = role;
@@ -189,9 +189,9 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+        Cliente cliente = (Cliente) o;
 
-        return id != null ? id.equals(user.id) : user.id == null;
+        return id != null ? id.equals(cliente.id) : cliente.id == null;
     }
 
     @Override

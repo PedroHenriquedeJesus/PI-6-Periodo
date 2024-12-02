@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.projetoPI.VPK.model.User;
+import com.projetoPI.VPK.model.Cliente;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,19 +19,19 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String generateToken(User user) {
+    public String generateToken(Cliente cliente) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTCreator.Builder builder = JWT.create()
                     .withIssuer("auth-api")
-                    .withSubject(user.getEmail())
+                    .withSubject(cliente.getEmail())
                     .withExpiresAt(genExpirationDate());
 
             // Adiciona os dados do usuário como claims
-            builder.withClaim("nome", user.getNome());
-            builder.withClaim("cpf", user.getCPF());
-            builder.withClaim("telefone", user.getTelefone());
-            builder.withClaim("role", user.getRole().toString());
+            builder.withClaim("nome", cliente.getNome());
+            builder.withClaim("cpf", cliente.getCPF());
+            builder.withClaim("telefone", cliente.getTelefone());
+            builder.withClaim("role", cliente.getRole().toString());
 
 
             String token = builder.sign(algorithm); // Assina o token após adicionar as claims
